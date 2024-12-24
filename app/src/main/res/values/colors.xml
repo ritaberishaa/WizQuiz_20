@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background_login">#2aae88</color> <!-- Zëvendëso #2ECC71 me ngjyrën e logos -->
+    <color name="background_purple">#4B0082</color>
+    <color name="button_white">#FFFFFF</color>
+    <color name="text_black">#000000</color>
+    <color name="link_blue">#ADD8E6</color>
+
 </resources>
