@@ -9,48 +9,66 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
 
-    private EditText etUsername, etPassword;
-    private Button btnLogin;
-    private TextView tvSignUpLink; // opsional, p.sh. për të hapur SignUpActivity
+
+public class LoginActivity extends AppCompatActivity {
+    private EditText emailEditText, passwordEditText;
+    private Button loginButton, createAccountButton;
+    private DB DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); // lidh layout-in e login
+        setContentView(R.layout.activity_login);
 
-        // Lidhet me elementët e layout-it
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
-        btnLogin   = findViewById(R.id.btnLogin);
-        tvSignUpLink = findViewById(R.id.tvSignUpLink);
+        // Initialize the elements
+        emailEditText = findViewById(R.id.editTextEmail);
+        passwordEditText = findViewById(R.id.editTextPassword);
 
-        // Veprimi kur klikon “Login”
-        btnLogin.setOnClickListener(view -> {
-            String username = etUsername.getText().toString().trim();
-            String password = etPassword.getText().toString().trim();
+        loginButton = findViewById(R.id.login);
+        createAccountButton = findViewById(R.id.createAccountButton);
 
-            // Këtu shto logjikën e verifikimit. Shembull i thjeshtë:
-            if (username.equals("admin") && password.equals("1234")) {
-                // Hyrje e suksesshme
-                Toast.makeText(this, "Hyrje e suksesshme!", Toast.LENGTH_SHORT).show();
+        DB = new DB(this);
 
-                // Kalo te MainActivity
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
 
-                // Mbyll LoginActivity që të mos kthehesh pas me 'Back'
-                finish();
-            } else {
-                Toast.makeText(this, "Username ose Password gabim!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        loginButton.setOnClickListener(v -> login());
 
-        // Nëse ke një aktivitet tjetër për regjistrim
-        tvSignUpLink.setOnClickListener(view -> {
-            // startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-            Toast.makeText(this, "Klik Regjistrohu!", Toast.LENGTH_SHORT).show();
+        createAccountButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
+
+    private void login() {
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+
+        if (validateInput(email, password)) {
+            if (DB.validateUser(email, password)) {
+                // User validation success
+
+                // Go to 2FA
+                Intent intent = new Intent(LoginActivity.this, CodeConfirmationActivity.class);
+                intent.putExtra("email", email);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private boolean validateInput(String email, String password) {
+        if (email.isEmpty()) {
+            emailEditText.setError("Email cannot be empty");
+            return false;
+        }
+        if (password.isEmpty()) {
+            passwordEditText.setError("Password cannot be empty");
+            return false;
+        }
+        return true;
+    }
 }
+
