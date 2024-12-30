@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+
 }
 
 android {
@@ -54,4 +55,11 @@ dependencies {
 
     // BCrypt library for password hashing
     implementation("org.mindrot:jbcrypt:0.4")
+
+    // Room runtime
+    implementation("androidx.room:room-runtime:2.5.2")
+
+    // Annotation processor for Java projects
+    annotationProcessor("androidx.room:room-compiler:2.5.2")
+
 }

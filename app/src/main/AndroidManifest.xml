@@ -33,6 +33,15 @@
             android:name=".ResetPasswordActivity"
             android:exported="false" />
         <activity
+            android:name=".FlashcardActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.wizquiz.FLASHCARD" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
