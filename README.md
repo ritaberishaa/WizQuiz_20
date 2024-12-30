@@ -41,9 +41,9 @@ Sigurohuni që keni të instaluar:
 - Java Development Kit (JDK 11 ose më i lartë)
 - Android SDK
 
-### Klononi Depo-në
+### Klononi Repo-n
 
-Klononi repo-në në makinën tuaj lokale duke përdorur komandën e mëposhtme:
+Klononi repo-n në makinën tuaj lokale duke përdorur komandën e mëposhtme:
 
 ```bash
 git clone https://github.com/ritaberishaa/wizquiz.git
