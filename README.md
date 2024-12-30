@@ -46,4 +46,4 @@ Sigurohuni që keni të instaluar:
 Klononi repo-n në makinën tuaj lokale duke përdorur komandën e mëposhtme:
 
 ```bash
-git clone https://github.com/ritaberishaa/wizquiz.git
+git clone https://github.com/ritaberishaa/WizQuiz_20.git
