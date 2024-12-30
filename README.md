@@ -6,7 +6,7 @@ WizQuiz është një aplikacion i thjeshtë quiz për Android që u ofron përdo
 
 - **Regjistrimi dhe Identifikimi i Përdoruesve**:
   - Përdoruesit mund të regjistrohen me email, fjalëkalim dhe emër.
-  - Fjalëkalimet ruhen në mënyrë të sigurt duke përdorur bibliotekën BCrypt.
+  - Fjalëkalimet ruhen në mënyrë të sigurt duke përdorur librarin BCrypt.
   - Përdoruesit mund të identifikohen duke përdorur kredencialet e tyre.
 
 - **Aktiviteti Kryesor**:
