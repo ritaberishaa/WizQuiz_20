@@ -96,4 +96,18 @@ public class DB extends SQLiteOpenHelper {
         cursor.close();
         return code;
     }
+
+    public boolean updatePassword(String email, String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt()); // Hash the new password
+
+        contentValues.put("password", hashedPassword);
+
+        int rowsAffected = db.update("users", contentValues, "email=?", new String[]{email});
+        return rowsAffected > 0; // Return true if the update was successful
+    }
+
+
+
 }

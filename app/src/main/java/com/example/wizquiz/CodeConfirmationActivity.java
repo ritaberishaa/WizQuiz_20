@@ -45,19 +45,31 @@ public class CodeConfirmationActivity extends AppCompatActivity {
 
     private void verifyCode(String email) {
         String code = editTextConfirmationCode.getText().toString().trim();
+
         if (code.isEmpty()) {
             Toast.makeText(this, "Please enter the confirmation code", Toast.LENGTH_SHORT).show();
-        } else if (code.equals(generatedOtp)){
-            Intent intent = new Intent(CodeConfirmationActivity.this, HomeActivity.class);
-            startActivity(intent);
+        } else if (code.equals(generatedOtp)) {
+            // Determine the flow (either login or forgot password)
+            String flow = getIntent().getStringExtra("flow");
+
+
+            if ("forgot_password".equals(flow)) {
+                // Redirect to ResetPasswordActivity for Forgot Password flow
+                Intent intent = new Intent(CodeConfirmationActivity.this, ResetPasswordActivity.class);
+                intent.putExtra("email", email); // Pass the verified email
+                startActivity(intent);
+            } else {
+                // Default to HomeActivity for login flow
+                Intent intent = new Intent(CodeConfirmationActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
             finish();
-
-        }
-        else{
+        } else {
             Toast.makeText(this, "Invalid confirmation code", Toast.LENGTH_SHORT).show();
-
         }
     }
+
+
 
     private String generateOtp() {
         SecureRandom random = new SecureRandom();
