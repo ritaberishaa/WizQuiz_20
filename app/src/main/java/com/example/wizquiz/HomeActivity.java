@@ -8,6 +8,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
+import android.widget.ImageView;
+import android.view.View;
 import androidx.core.view.WindowInsetsCompat;
 
 public class HomeActivity extends AppCompatActivity {
@@ -42,6 +44,16 @@ public class HomeActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Log.e("HomeActivity", "Error launching FlashcardActivity", e);
                 Toast.makeText(HomeActivity.this, "Error opening FlashcardActivity", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ImageView profileImageView = findViewById(R.id.profileImageView);
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open ProfileActivity when the image is clicked
+                Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+                startActivity(intent);
             }
         });
     }

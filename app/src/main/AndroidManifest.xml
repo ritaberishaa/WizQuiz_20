@@ -32,6 +32,7 @@
         <activity
             android:name=".ResetPasswordActivity"
             android:exported="false" />
+        <activity android:name=".ProfileActivity"/>
         <activity
             android:name=".FlashcardActivity"
             android:exported="false">

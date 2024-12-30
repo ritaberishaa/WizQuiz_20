@@ -108,6 +108,21 @@ public class DB extends SQLiteOpenHelper {
         return rowsAffected > 0; // Return true if the update was successful
     }
 
+    public String getUserName(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT firstName, lastName FROM users WHERE email=?", new String[]{email});
+
+        String fullName = null;
+        if (cursor.moveToFirst()) {
+            String firstName = cursor.getString(0);
+            String lastName = cursor.getString(1);
+            fullName = firstName + " " + lastName; // Combine first and last name
+        }
+        cursor.close();
+        return fullName;
+    }
+
+
 
 
 }
